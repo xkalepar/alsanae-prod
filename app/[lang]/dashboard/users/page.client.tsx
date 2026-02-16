@@ -27,7 +27,7 @@ import {
 } from "./components/forms";
 
 import { useParams } from "next/navigation";
-import { User } from "@/generated/prisma/browser";
+import { User } from "@/generated/prisma";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { toast } from "sonner";

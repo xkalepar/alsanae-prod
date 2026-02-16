@@ -28,7 +28,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 
-import { Project } from "@/generated/prisma/browser";
+import { Project } from "@/generated/prisma";
 
 import { projectsTable } from "./components/projects-column";
 import {
