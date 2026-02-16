@@ -1,5 +1,9 @@
 {
   "name": "alsanae-prod",
+  "packageManager": "pnpm@10.17.1",
+  "engines": {
+    "node": "20.x"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,7 +23,6 @@
     "@radix-ui/react-visually-hidden": "^1.2.4",
     "@tanstack/react-table": "^8.21.3",
     "@uploadthing/react": "^7.3.3",
-    "alsanae-prod": "link:",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

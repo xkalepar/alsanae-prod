@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 export async function generateStaticParams({
   params,
 }: {
-  params: { lang: Locale };
+  params: { lang: string };
 }) {
   // lang isn't needed for DB fetch, but kept to match Next signature
   const projects = await getProjects({});
@@ -20,10 +20,11 @@ export async function generateStaticParams({
 }
 
 export default async function ProjectPage(props: {
-  params: Promise<{ lang: Locale; id: string }>;
+  params: Promise<{ lang: string; id: string }>;
 }) {
   const params = await props.params;
-  const dict = await getDictionary(params.lang);
+  const locale = params.lang as Locale;
+  const dict = await getDictionary(locale);
 
   const project = await getProjectById({ id: params.id });
 
@@ -31,7 +32,7 @@ export default async function ProjectPage(props: {
 
   return (
     <div className="container py-10">
-      <ProjectDetails project={project} lang={params.lang} />
+      <ProjectDetails project={project} lang={locale} />
 
       {/* <ProjectGallery images={project.images} /> */}
 
@@ -39,7 +40,7 @@ export default async function ProjectPage(props: {
         startDate={project.startDate}
         endDate={project.endDate}
         milestones={project.milestones}
-        lang={params.lang}
+        lang={locale}
       />
     </div>
   );
