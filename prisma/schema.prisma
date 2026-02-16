@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title       Language
+  description Language?
+  location    String?
+  poster      Image
+  category    String
+  startDate   DateTime?
+  endDate     DateTime?
+  client      String?
+  milestones  Milestone[]
+
+  images Image[]
+}
+
+model Milestone {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       Language?
+  date        DateTime?
+  completed   Boolean   @default(true)
+  description Language?
+  project     Project?  @relation(fields: [projectId], references: [id])
+  projectId   String?   @db.ObjectId
+}
+
+model User {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName      String
+  phoneNumber   Int
+  password      String
+  email         String   @unique
+  verified      Boolean  @default(false)
+  verifyingCode Int?
+  role          Roles    @default(admin)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum Roles {
+  admin
+  superAdmin
+}
+
+type Language {
+  ar String
+  en String?
+}
+
+type Image {
+  src String
+  alt String?
+  key String
+}
